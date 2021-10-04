@@ -66,10 +66,10 @@ namespace CommanderGQL
                 endpoints.MapGraphQL();
             });
 
-        app.UseGraphQLVoyager(new VoyagerOptions()
-        {
-            GraphQLEndPoint = "/graphql"
-        }, "/graphql-voyager");
+            app.UseGraphQLVoyager(new VoyagerOptions()
+            {
+                GraphQLEndPoint = "/graphql"
+            }, "/graphql-voyager");
         }
     }
 }

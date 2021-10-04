@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CommanderGQL.Data;
@@ -66,6 +67,47 @@ namespace CommanderGQL.GraphQL
                 await context.SaveChangesAsync();
 
                 return new AddCommandPayload(command);
+            }
+
+        /// <summary>
+        /// Remove a <see cref="Platform"/> based on <paramref name="input"/>.
+        /// </summary>
+        /// <param name="input">The <see cref="RemovePlatformInput"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
+        /// <returns>The added <see cref="Platform"/>.</returns>
+        [UseDbContext(typeof(AppDbContext))]
+        [GraphQLDescription("Remove a Platform.")]
+        public async Task<RemovePlatformPayload> RemovePlatformAsync(RemovePlatformInput input,
+            [ScopedService] AppDbContext context) 
+            {
+                Platform platform = context.Platforms.FirstOrDefault(p => p.Id == input.Id);
+
+                context.Platforms.Remove(platform);
+                await context.SaveChangesAsync();
+
+                return new RemovePlatformPayload(platform);
+
+            }
+
+        /// <summary>
+        /// Update a <see cref="Platform"/> based on <paramref name="input"/>.
+        /// </summary>
+        /// <param name="input">The <see cref="UpdatePlatformInput"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
+        /// <returns>The added <see cref="Platform"/>.</returns>
+        [UseDbContext(typeof(AppDbContext))]
+        [GraphQLDescription("Update a Platform.")]
+        public async Task<UpdatePlatformPayload> UpdatePlatformAsync(UpdatePlatformInput input,
+            [ScopedService] AppDbContext context) 
+            {
+                Platform platform = context.Platforms.FirstOrDefault(p => p.Id == input.Id);
+                platform.Name = input.Name;
+
+                context.Platforms.Update(platform);
+                await context.SaveChangesAsync();
+
+                return new UpdatePlatformPayload(platform);
+
             }
     }
 }
