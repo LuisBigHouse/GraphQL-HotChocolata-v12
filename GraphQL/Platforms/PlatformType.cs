@@ -25,11 +25,11 @@ namespace CommanderGQL.GraphQL.Platforms
 
                 // Mudou no HotChocolate 12
 
-            // descriptor
-            //     .Field(p => p.Commands)
-            //     .ResolveWith<Resolvers>(p => p.GetCommands(default!, default!))
-            //     .UseDbContext<AppDbContext>()
-            //     .Description("This is the list of available commands for this platform.");
+            descriptor
+                .Field(p => p.Commands)
+                // .ResolveWith<Resolvers>(p => p.GetCommands(default!, default!))
+                .UseDbContext<AppDbContext>()
+                .Description("This is the list of available commands for this platform.");
         }
 
         // private class Resolvers

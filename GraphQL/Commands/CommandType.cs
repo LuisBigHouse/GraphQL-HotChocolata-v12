@@ -30,11 +30,11 @@ namespace CommanderGQL.GraphQL.Commands
 
                 // Mudou no HotChocolate 12
 
-            // descriptor
-            //     .Field(c => c.Platform)
-            //     .ResolveWith<Resolvers>(c => c.GetPlatform(default!, default!))
-            //     .UseDbContext<AppDbContext>()
-            //     .Description("This is the platform to which the command belongs.");
+            descriptor
+                .Field(c => c.Platform)
+                // .ResolveWith<Resolvers>(c => c.GetPlatform(default!, default!))
+                .UseDbContext<AppDbContext>()
+                .Description("This is the platform to which the command belongs.");
 
         }
 
